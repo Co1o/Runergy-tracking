@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Order</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body class="bg-light">
+    <nav class="navbar navbar-dark bg-primary">
+        <div class="container-fluid">
+            <span class="navbar-brand">Edit Order</span>
+            <a href="/dashboard" class="btn btn-light">Back to Dashboard</a>
+        </div>
+    </nav>
+
+    <div class="container my-5">
+        <h2>Edit Order</h2>
+        <form method="POST">
+            <div class="mb-3">
+                <label class="form-label">PO Number</label>
+                <input type="text" name="po_number" class="form-control" value="{{ order.po_number }}">
+            </div>
+            <div class="mb-3">
+                <label class="form-label">MBL Number</label>
+                <input type="text" name="mbl_number" class="form-control" value="{{ order.mbl_number }}">
+            </div>
+            <div class="mb-3">
+                <label class="form-label">HBL Number</label>
+                <input type="text" name="hbl_number" class="form-control" value="{{ order.hbl_number }}">
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Container Number</label>
+                <input type="text" name="container_number" class="form-control" value="{{ order.container_number }}">
+            </div>
+            <div class="mb-3">
+                <label class="form-label">POL (Origin Port)</label>
+                <input type="text" name="pol" class="form-control" value="{{ order.pol }}">
+            </div>
+            <div class="mb-3">
+                <label class="form-label">ETD</label>
+                <input type="text" name="etd" class="form-control" value="{{ order.etd }}">
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Booking ETA</label>
+                <input type="text" name="booking_eta" class="form-control" value="{{ order.booking_eta }}">
+            </div>
+            <div class="mb-3">
+                <label class="form-label">POD ETA</label>
+                <input type="text" name="pod_eta" class="form-control" value="{{ order.pod_eta }}">
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Material Code</label>
+                <input type="text" name="material_code" class="form-control" value="{{ order.material_code }}">
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Quantity</label>
+                <input type="text" name="quantity" class="form-control" value="{{ order.quantity }}">
+            </div>
+            <button type="submit" class="btn btn-success">Save Changes</button>
+        </form>
+    </div>
+</body>
+</html>

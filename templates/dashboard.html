@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="{{ session.get('lang', 'zh') }}">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ _('Runergy Order Dashboard') }}</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body class="bg-light">
+
+    <!-- 顶部导航栏 -->
+    <nav class="navbar navbar-dark bg-primary">
+        <div class="container-fluid">
+            <span class="navbar-brand">{{ _('Runergy Order Dashboard') }}</span>
+            <div class="d-flex">
+                <!-- 语言切换按钮 -->
+                <div class="dropdown me-2">
+                    <button class="btn btn-light dropdown-toggle" type="button" id="languageDropdown" data-bs-toggle="dropdown">
+                        {{ _('Language') }}
+                    </button>
+                    <ul class="dropdown-menu">
+                        <li><a class="dropdown-item" href="/switch_language/en">{{ _('English') }}</a></li>
+                        <li><a class="dropdown-item" href="/switch_language/zh">{{ _('Chinese') }}</a></li>
+                    </ul>
+                </div>
+                <!-- 退出登录 -->
+                <a href="/logout" class="btn btn-danger">{{ _('Logout') }}</a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container my-5">
+        <h2 class="mb-4">{{ _('Order Summary') }}</h2>
+
+        <!-- 搜索表单 -->
+        <form method="POST" action="/dashboard" class="mb-4">
+            <div class="row">
+                <div class="col-md-3">
+                    <input type="text" name="search_po" class="form-control" placeholder="{{ _('Search by PO Number') }}">
+                </div>
+                <div class="col-md-3">
+                    <input type="text" name="search_mbl" class="form-control" placeholder="{{ _('Search by MBL Number') }}">
+                </div>
+                <div class="col-md-3">
+                    <input type="text" name="search_hbl" class="form-control" placeholder="{{ _('Search by HBL Number') }}">
+                </div>
+                <div class="col-md-3">
+                    <input type="text" name="search_container" class="form-control" placeholder="{{ _('Search by Container Number') }}">
+                </div>
+                <div class="col-md-3">
+                    <input type="text" name="search_pol" class="form-control" placeholder="{{ _('Search by POL (Origin Port)') }}">
+                </div>
+                <div class="col-md-3">
+                    <input type="text" name="search_etd" class="form-control" placeholder="{{ _('Search by ETD') }}">
+                </div>
+                <div class="col-md-3">
+                    <input type="text" name="search_booking_eta" class="form-control" placeholder="{{ _('Search by Booking ETA') }}">
+                </div>
+                <div class="col-md-3">
+                    <input type="text" name="search_pod_eta" class="form-control" placeholder="{{ _('Search by POD ETA') }}">
+                </div>
+                <div class="col-md-3">
+                    <input type="text" name="search_material_code" class="form-control" placeholder="{{ _('Search by Material Code') }}">
+                </div>
+                <div class="col-md-3">
+                    <input type="text" name="search_quantity" class="form-control" placeholder="{{ _('Search by Quantity') }}">
+                </div>
+            </div>
+            <button type="submit" class="btn btn-primary mt-2">{{ _('Search') }}</button>
+        </form>
+
+        <!-- 上传 Excel -->
+        <div class="row mt-4">
+            <form method="POST" enctype="multipart/form-data" action="/upload">
+                <div class="mb-3">
+                    <label for="file" class="form-label">{{ _('Upload Excel File') }}</label>
+                    <input type="file" name="file" class="form-control" required>
+                </div>
+                <button type="submit" class="btn btn-success">{{ _('Upload') }}</button>
+            </form>
+        </div>
+
+        <h3 class="mt-5">{{ _('Recent Orders') }}</h3>
+        <table class="table table-bordered table-striped">
+            <thead class="table-primary">
+                <tr>
+                    <th>{{ _('PO Number') }}</th>
+                    <th>{{ _('MBL Number') }}</th>
+                    <th>{{ _('HBL Number') }}</th>
+                    <th>{{ _('Container Number') }}</th>
+                    <th>{{ _('POL (Origin Port)') }}</th>
+                    <th>{{ _('ETD') }}</th>
+                    <th>{{ _('Booking ETA') }}</th>
+                    <th>{{ _('POD ETA') }}</th>
+                    <th>{{ _('Material Code') }}</th>
+                    <th>{{ _('Quantity') }}</th>
+                    <th>{{ _('Actions') }}</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for order in orders %}
+                <tr>
+                    <td>{{ order.po_number or 'N/A' }}</td>
+                    <td>{{ order.mbl_number or 'N/A' }}</td>
+                    <td>{{ order.hbl_number or 'N/A' }}</td>
+                    <td>{{ order.container_number or 'N/A' }}</td>
+                    <td>{{ order.pol or 'N/A' }}</td>
+                    <td>{{ order.etd or 'N/A' }}</td>
+                    <td>{{ order.booking_eta or 'N/A' }}</td>
+                    <td>{{ order.pod_eta or 'N/A' }}</td>
+                    <td>{{ order.material_code or 'N/A' }}</td>
+                    <td>{{ order.quantity or 'N/A' }}</td>
+                    <td>
+                        <a href="{{ url_for('edit_order', order_id=order.id) }}" class="btn btn-warning btn-sm">{{ _('Edit') }}</a>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+
+        <!-- 导出 Excel -->
+        <a href="/export" class="btn btn-success mt-3">{{ _('Export to Excel') }}</a>
+    </div>
+
+    <!--
+    <script>
+        // 订单状态图表
+        fetch('/api/order_status')
+            .then(response => response.json())
+            .then(data => {
+                const ctx = document.createElement('canvas');
+                document.body.appendChild(ctx);
+                const statusLabels = Object.keys(data);
+                const statusCounts = Object.values(data);
+
+                new Chart(ctx, {
+                    type: 'bar',
+                    data: {
+                        labels: statusLabels,
+                        datasets: [{
+                            label: '{{ _("Orders by Destination Port") }}',
+                            data: statusCounts,
+                            backgroundColor: ['#1e3a8a', '#2563eb', '#60a5fa', '#93c5fd', '#bfdbfe']
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        plugins: {
+                            legend: {
+                                position: 'bottom'
+                            }
+                        }
+                    }
+                });
+            });
+    </script>
+    -->
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+</body>
+</html>

@@ -1,0 +1,151 @@
+# English translations for PROJECT.
+# Copyright (C) 2025 ORGANIZATION
+# This file is distributed under the same license as the PROJECT project.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2025.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: PROJECT VERSION\n"
+"Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
+"POT-Creation-Date: 2025-02-27 14:25-0600\n"
+"PO-Revision-Date: 2025-02-27 14:25-0600\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language: en\n"
+"Language-Team: en <LL@li.org>\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.17.0\n"
+
+#: templates/dashboard.html:6 templates/dashboard.html:15
+msgid "Runergy Order Dashboard"
+msgstr "Runergy Order Dashboard"
+
+#: templates/dashboard.html:20
+msgid "Language"
+msgstr "Language"
+
+#: templates/dashboard.html:23
+msgid "English"
+msgstr "English"
+
+#: templates/dashboard.html:24
+msgid "Chinese"
+msgstr "Chinese"
+
+#: templates/dashboard.html:28
+msgid "Logout"
+msgstr "Logout"
+
+#: templates/dashboard.html:34
+msgid "Order Summary"
+msgstr "Order Summary"
+
+#: templates/dashboard.html:40
+msgid "Search by PO Number"
+msgstr "Search by PO Number"
+
+#: templates/dashboard.html:43
+msgid "Search by MBL Number"
+msgstr "Search by MBL Number"
+
+#: templates/dashboard.html:46
+msgid "Search by HBL Number"
+msgstr "Search by HBL Number"
+
+#: templates/dashboard.html:49
+msgid "Search by Container Number"
+msgstr "Search by Container Number"
+
+#: templates/dashboard.html:52
+msgid "Search by POL (Origin Port)"
+msgstr "Search by POL (Origin Port)"
+
+#: templates/dashboard.html:55
+msgid "Search by ETD"
+msgstr "Search by ETD"
+
+#: templates/dashboard.html:58
+msgid "Search by Booking ETA"
+msgstr "Search by Booking ETA"
+
+#: templates/dashboard.html:61
+msgid "Search by POD ETA"
+msgstr "Search by POD ETA"
+
+#: templates/dashboard.html:64
+msgid "Search by Material Code"
+msgstr "Search by Material Code"
+
+#: templates/dashboard.html:67
+msgid "Search by Quantity"
+msgstr "Search by Quantity"
+
+#: templates/dashboard.html:70
+msgid "Search"
+msgstr "Search"
+
+#: templates/dashboard.html:77
+msgid "Upload Excel File"
+msgstr "Upload Excel File"
+
+#: templates/dashboard.html:80
+msgid "Upload"
+msgstr "Upload"
+
+#: templates/dashboard.html:84
+msgid "Recent Orders"
+msgstr "Recent Orders"
+
+#: templates/dashboard.html:88
+msgid "PO Number"
+msgstr "PO Number"
+
+#: templates/dashboard.html:89
+msgid "MBL Number"
+msgstr "MBL Number"
+
+#: templates/dashboard.html:90
+msgid "HBL Number"
+msgstr "HBL Number"
+
+#: templates/dashboard.html:91
+msgid "Container Number"
+msgstr "Container Number"
+
+#: templates/dashboard.html:92
+msgid "POL (Origin Port)"
+msgstr "POL (Origin Port)"
+
+#: templates/dashboard.html:93
+msgid "ETD"
+msgstr "ETD"
+
+#: templates/dashboard.html:94
+msgid "Booking ETA"
+msgstr "Booking ETA"
+
+#: templates/dashboard.html:95
+msgid "POD ETA"
+msgstr "POD ETA"
+
+#: templates/dashboard.html:96
+msgid "Material Code"
+msgstr "Material Code"
+
+#: templates/dashboard.html:97
+msgid "Quantity"
+msgstr "Quantity"
+
+#: templates/dashboard.html:98
+msgid "Actions"
+msgstr "Actions"
+
+#: templates/dashboard.html:115
+msgid "Edit"
+msgstr "Edit"
+
+#: templates/dashboard.html:123
+msgid "Export to Excel"
+msgstr "Export to Excel"
