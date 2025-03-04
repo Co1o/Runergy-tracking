@@ -7,9 +7,19 @@ from werkzeug.utils import secure_filename
 from datetime import datetime
 from flask import session
 from flask_babel import Babel, gettext as _
+from flask_migrate import Migrate
+
 # 初始化 Flask 应用
 app = Flask(__name__)
 app.secret_key = 'supersecretkey'
+
+# 配置数据库
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///orders.db'
+app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+
+# 初始化数据库
+db = SQLAlchemy(app)
+migrate = Migrate(app, db)  # Migrate 必须在 db 初始化后再绑定 app
 
 # 配置文件上传目录
 UPLOAD_FOLDER = 'uploads'
@@ -17,16 +27,19 @@ app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 if not os.path.exists(UPLOAD_FOLDER):
     os.makedirs(UPLOAD_FOLDER)
 
-# 配置 SQLite 数据库
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///orders.db'
-app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
-
-db = SQLAlchemy(app)
-
-# 初始化登录管理
+# 初始化 Flask-Login
 login_manager = LoginManager()
 login_manager.init_app(app)
 login_manager.login_view = 'login'
+
+# 配置 Flask-Babel
+app.config['BABEL_DEFAULT_LOCALE'] = 'zh'
+babel = Babel(app)
+
+def get_locale():
+    return session.get('lang', 'zh')
+
+babel.init_app(app, locale_selector=get_locale)
 
 # 用户数据
 users = {
